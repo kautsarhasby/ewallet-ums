@@ -4,6 +4,6 @@ type IHealthCheckServices interface {
 	HealthCheckServices() (string, error)
 }
 
-type IHealthCheckRepo interface {
+type IHealthCheckRepository interface {
 	HealthCheckRepository() (string, error)
 }

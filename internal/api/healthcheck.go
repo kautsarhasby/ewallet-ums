@@ -8,16 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type HealthCheck struct {
-	HealthCheckServices interfaces.IHealthCheckServices
+type HealthCheckHandler struct {
+	HealthCheckService interfaces.IHealthCheckServices
 }
 
-func (api *HealthCheck) HealthCheckHandlerHTTP(c *gin.Context) {
-	msg, err := api.HealthCheckServices.HealthCheckServices()
+func (api *HealthCheckHandler) HealthCheckHandlerHTTP(c *gin.Context) {
+	msg, err := api.HealthCheckService.HealthCheckServices()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 
-	helpers.SendReponseHTTP(c, http.StatusOK, msg, nil)
+	helpers.SendResponseHTTP(c, http.StatusOK, msg, nil)
 }
