@@ -5,6 +5,7 @@ import (
 	"kautsarhasby/ewallet-ums/internal/interfaces"
 	"kautsarhasby/ewallet-ums/internal/models"
 
+	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -15,13 +16,13 @@ type RegisterService struct {
 func (s *RegisterService) Register(ctx context.Context, request models.User) (interface{}, error) {
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed to generate password")
 	}
 	request.Password = string(hashPassword)
 
 	err = s.UserRepository.InsertUser(ctx, &request)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed to generate password")
 	}
 
 	response := request

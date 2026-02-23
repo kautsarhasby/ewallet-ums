@@ -9,8 +9,10 @@ import (
 )
 
 type TokenClaims struct {
-	Username string
-	Fullname string
+	UserID   int    `json:"user_id"`
+	Username string `json:"username"`
+	Fullname string `json:"fullname"`
+	Email    string `json:"email"`
 	jwt.RegisteredClaims
 }
 

@@ -32,11 +32,11 @@ func (s *LoginService) Login(ctx context.Context, request models.LoginRequest) (
 	}
 	token, err := helpers.GenerateToken(ctx, user.ID, user.Username, user.Fullname, "token")
 	if err != nil {
-		return response, errors.Wrap(err, "failed to compare password")
+		return response, errors.Wrap(err, "failed to generate token")
 	}
 	refreshToken, err := helpers.GenerateToken(ctx, user.ID, user.Username, user.Fullname, "refreshToken")
 	if err != nil {
-		return response, errors.Wrap(err, "failed to compare password")
+		return response, errors.Wrap(err, "failed to generate refresh token")
 	}
 
 	session := &models.UserSession{

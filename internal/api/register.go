@@ -40,5 +40,4 @@ func (api *RegisterHandler) Register(c *gin.Context) {
 	}
 
 	helpers.SendResponseHTTP(c, http.StatusCreated, constants.SuccessMessage, response)
-	return
 }

@@ -8,7 +8,7 @@ import (
 
 type User struct {
 	ID          int       `json:"id"`
-	Username    string    `json:"username" gorm:"column:username;type:varchar(20);unique;" validate:"required"`
+	Username    string    `json:"username" gorm:"column:username;type:varchar(20);index:idx_username;" validate:"required"`
 	Email       string    `json:"email" gorm:"column:email;type:varchar(100);unique;" validate:"required"`
 	PhoneNumber string    `json:"phone_number" gorm:"column:phone_number;type:varchar(15);" validate:"required"`
 	Fullname    string    `json:"fullname" gorm:"column:fullname;type:varchar(100);" validate:"required"`
@@ -31,8 +31,8 @@ func (l User) Validate() error {
 type UserSession struct {
 	ID                  uint      `gorm:"primarykey"`
 	UserID              int       `json:"user_id" gorm:"type:int;" validate:"required"`
-	Token               string    `json:"token" gorm:"type:varchar(255);" validate:"required"`
-	RefreshToken        string    `json:"refresh_token" gorm:"type:varchar(255);" validate:"required"`
+	Token               string    `json:"token" gorm:"index:idx_token;type:varchar(255);" validate:"required"`
+	RefreshToken        string    `json:"refresh_token" gorm:"index:idx_refresh_token;type:varchar(255);" validate:"required"`
 	TokenExpired        time.Time `json:"token_expired" validate:"required"`
 	RefreshTokenExpired time.Time `json:"refresh_token_expired" validate:"required"`
 	CreatedAt           time.Time
